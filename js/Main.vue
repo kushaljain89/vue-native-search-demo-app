@@ -1,23 +1,23 @@
 <template>
     <view class="container">
-        <text class="text-color-primary">My Vue Native App</text>
+        <status-bar bar-style="light-content"/>
+        <app-navigation/>
     </view>
 </template>
 
 <script>
+    import {AppNavigation} from "./routes";
+
     export default {
-        name: 'Main'
+        name: 'Main',
+        components: {AppNavigation}
     }
 </script>
 
 <style>
     .container {
-        background-color: white;
-        align-items: center;
-        justify-content: center;
+        background-color: black;
         flex: 1;
-    }
-    .text-color-primary {
-        color: blue;
+        justify-content: space-between;
     }
 </style>
