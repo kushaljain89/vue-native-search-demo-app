@@ -1,24 +1,31 @@
 <template>
     <view class="container">
-        <button :on-press="gotoSearch" title="Go to Search"/>
+        <popular-search-listing :search="gotoSearch.bind(this)"></popular-search-listing>
+        <recent-search-listing :search="gotoSearch.bind(this)"></recent-search-listing>
     </view>
 </template>
 
 <script>
+    import PopularSearchListing from '../components/popularSearchListing'
+    import RecentSearchListing from '../components/recentSearchListing'
+
     export default {
         name: 'home',
         props: {
-          navigation: {
-              type: Object
-          }
+            navigation: {
+                type: Object
+            }
         },
-        components: {},
+        components: {PopularSearchListing, RecentSearchListing},
         data () {
             return {}
         },
         methods: {
-            gotoSearch() {
-                this.navigation.navigate('Search');
+            gotoSearch(data) {
+                console.log('search clicked', data);
+                this.navigation.navigate('Search', {
+                    query: data
+                });
             }
         }
     }
@@ -28,7 +35,6 @@
     .container {
         flex: 1;
         background-color: black;
-        align-items: center;
-        justify-content: center;
+        justify-content: space-between;
     }
 </style>
