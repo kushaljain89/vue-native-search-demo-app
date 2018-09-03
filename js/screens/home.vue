@@ -1,11 +1,13 @@
 <template>
     <view class="container">
+        <SearchBox :onSearchClicked="gotoSearch"/>
         <popular-search-listing :search="gotoSearch.bind(this)"></popular-search-listing>
         <recent-search-listing :search="gotoSearch.bind(this)"></recent-search-listing>
     </view>
 </template>
 
 <script>
+    import SearchBox from '../components/searchBox'
     import PopularSearchListing from '../components/popularSearchListing'
     import RecentSearchListing from '../components/recentSearchListing'
 
@@ -16,7 +18,7 @@
                 type: Object
             }
         },
-        components: {PopularSearchListing, RecentSearchListing},
+        components: {SearchBox, PopularSearchListing, RecentSearchListing},
         data () {
             return {}
         },
