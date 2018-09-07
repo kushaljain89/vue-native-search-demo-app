@@ -1,6 +1,7 @@
 <template>
     <modal animation-type="slide"
            :transparent="false"
+           :on-request-close="close"
            :visible="!!uri">
         <safe-area-view :style="{backgroundColor: 'black', flex: 1}">
             <view class="container">
