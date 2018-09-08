@@ -10,7 +10,10 @@
 
     export default {
         name: 'Main',
-        components: {AppNavigation}
+        components: {AppNavigation},
+        created () {
+            this.$store.dispatch('fetchRecentsFromLocal')
+        }
     }
 </script>
 
