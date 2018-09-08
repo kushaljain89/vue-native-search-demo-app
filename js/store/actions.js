@@ -1,20 +1,24 @@
 import {AsyncStorage} from "react-native"
 import {ApiService} from "../service/apiService";
+import {searchSample, suggesstionSample} from "../sample";
 
 export default {
     fetchSuggestions: ({commit}, payload) => {
         console.log('fetching suggestions for ', payload);
         commit('setLoadingSuggestions', true);
         ApiService.fetchSuggesstions(payload).then(data => {
-            commit('setSuggestions', data)
+            commit('setSuggestions', (data.suggestionGroups.find(group => group.name === 'Web') || {}).searchSuggestions || [])
         }).catch(err => commit('setLoadingSuggestions', false))
     },
     fetchSearchData: ({commit, dispatch}, payload) => {
         commit('setLoadingSearchData', true);
         ApiService.fetchSearchResults(payload).then(data => {
-            commit('setSearchData', {data, query: payload})
+            commit('setSearchData', {data: data.webPages.value, query: payload});
             dispatch('addToRecents', payload);
-        }).catch(err => commit('setLoadingSearchData', false))
+        }).catch(err => {
+            console.log(err)
+            commit('setLoadingSearchData', false)
+        })
     },
     resetRecents: ({commit}) => {
         commit('setRecents', []);
